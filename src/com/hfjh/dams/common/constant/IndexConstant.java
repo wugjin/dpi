@@ -9,7 +9,7 @@ public class IndexConstant {
 	public static final String DPI_SESSION_STOP = "dpi_session_stop";
 	
 	//挂接停止
-	public static final String DPI_STOP_VALUE = "0";
+	public static final String DPI_STOP_VALUE = "0"; 
 	
 	//挂接没有停止
 	public static final String DPI_NOT_STOP_VALUE = "1";
