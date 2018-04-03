@@ -1,0 +1,90 @@
+.STYLE1 {
+	color: #1e5691;
+	font-size: 13px;
+	font-weight: bold;
+}
+.STYLE6 {
+	color: #000000;
+	font-size: 12;
+}
+.STYLE10 {
+	color: #000000;
+	font-size: 12px;
+}
+.STYLE19 {
+	color: #344b50;
+	font-size: 12px;
+}
+.STYLE22 {
+	font-size: 12px;
+	color: #295568;
+}
+
+.STYLE23 {color: #1e5691}
+ #log {
+            margin: 0;
+            padding: 0;
+            width: 500px;
+        }
+
+        #log li {
+            list-style-position: inside;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            background: #f5f5f5;
+            position: relative;
+        }
+
+        #log li .progressbar {
+        	margin-top:2px;
+            height: 15px;
+            background: #fff;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        #log li .progress {
+            background: #fda600;
+            width: 0%;
+            height: 15px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        #log li p {
+            margin:2px 0 0 0;
+            line-height: 18px;
+        }
+
+        #log li.success {
+            border: 1px solid #e19402;
+            background: #ffc352;
+        }
+         #log li span.stopUpload {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: url('../images/cancel.png') no-repeat;
+            cursor: pointer;
+        }
+
+        #img span.cancel {
+            background: url('../images/cancel.png') no-repeat;
+        }
+        
+        a {color:#000;}
+a:visited {color:#000;}
+a:active {color:#000;}
+a:hover {text-decoration:none;}
