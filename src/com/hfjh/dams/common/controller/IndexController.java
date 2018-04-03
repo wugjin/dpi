@@ -277,9 +277,9 @@ public class IndexController extends BaseController{
 			}
 			is.close();
 			toClient.flush();
-		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
-		}
+			e.printStackTrace();
+		} 
 	}
 	
 	
