@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>DPI筛选</title>
+<title>提取首张图片</title>
 <link href="${ctx}/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="${ctx}/css/style.css"/>       
 <link href="${ctx}/assets/css/codemirror.css" rel="stylesheet">
@@ -26,7 +26,7 @@ $(function() {
 });
 
 function save(){
-	if(batchValidate('dpiForm')){
+	if(batchValidate('queryForm')){
 		search();
 	}
 }
@@ -35,12 +35,11 @@ function search(){
 	//显示进度条
 	showProcess();
 	$.ajax({
-		url:ctx+'/index/search',
+		url:ctx+'/query/search',
 		type:"POST",
         dataType:"json",
 		data:{fromPath:$('#fromPath').val(),
-			  toPath:$('#toPath').val(),
-			  dpiNum:$('#dpiNum').val()},
+			  toPath:$('#toPath').val()},
 		beforeSend: function(XMLHttpRequest){ },
 		success:function (data, textStatus){
 			clearInterval(processInterval);
@@ -76,7 +75,7 @@ function showProcess(){
 	    content: '<div id="jqmeter-container"></div>',
 	    cancel: function(){ 
 			$.ajax({
-				url:ctx+'/index/stop',
+				url:ctx+'/query/stop',
 				type:"POST",
 				dataType:"json",
 				data:{},
@@ -92,7 +91,7 @@ function showProcess(){
 	
 	processInterval = setInterval(function(){
 		$.ajax({
-			url:ctx+'/index/process',
+			url:ctx+'/query/process',
 			type:"POST",
 			dataType:"json",
 			data:{},
@@ -125,14 +124,9 @@ function openResult(result){
 	var html  = '<div class="margin clearfix">';
 		html +=	'<table cellspacing="0" cellpadding="0" class="table table-striped table-bordered table-hover dataTable no-footer">';
 		html +=	'<tr><td>本次检索一共'+result.dataCount+'条</td></tr>';
-		html +=	'<tr><td>dpi有问题'+result.failCount+'条</td></tr>';
-		html +=	'<tr><td>判断失败'+result.errorCount+'条</td></tr>';
 		html +=	'</table>';
 	
 	    html +=	'<div style="width: 100%;text-align: center; margin-top:15px;">';
-	    if(result.errorCount>0){
-	    	html += '<button id="add" onclick="dowloadLog()" type="button" class="btn btn-primary radius button_02"><i class="fa fa-arrow-circle-o-down"></i> 下载错误日志</button>';
-	    }
 	    html += '<button id="edit" onclick="cancelWin()" type="button" class="btn btn-default radius button_02"><i class="fa fa-remove"></i> 关闭</button>';		
 				
 		html += '</div></div>';
@@ -143,7 +137,7 @@ function openResult(result){
 		title: '检索结果统计',
 	    maxmin: false, 
 	    shadeClose: false, //点击遮罩关闭层
-	    area : ['500px' , '300px'],
+	    area : ['500px' , '200px'],
 	    content: html
 	});
 }
@@ -152,18 +146,13 @@ function cancelWin(){
 	layer.closeAll();
 }
 
-function dowloadLog(){
-	document.AnnexForm.method = "post";
-	document.AnnexForm.submit();
-}
-
 </script>
 </head>
 <body>
 	<div class="margin clearfix">
 		<div style="width:750px;margin:auto;">
-			<form id="dpiForm">
-				<table id="dpiTable" border="" cellspacing="0" cellpadding="0" style="width:100%;">
+			<form id="queryForm">
+				<table id="queryTable" border="" cellspacing="0" cellpadding="0" style="width:100%;">
 					<tr>
 						<td class="lable">
 							<label class="star">*</label>原文路径:
@@ -182,26 +171,14 @@ function dowloadLog(){
 								name="toPath" reg="notnull" tip="不能为空" value="" />
 						</td>
 					</tr>
-					<tr>
-						<td class="lable">
-							<label class="star">*</label>dpi小于:
-						</td>
-						<td>
-							<input type="text" style="width:350px;height:24px; margin-left:10px;" id="dpiNum"
-								name="dpiNum" reg="^\d+$&&notnull" tip="不能为空" value="300" />
-						</td>
-					</tr>
 				</table>
 			</form>
 		</div>
 		
 		<div class="anniu">
-			<a target="_self" href="${ctx}/query/index.html" class="btn btn-success" title="提取首张图片"><i class="fa fa-cogs"></i> 提取首张图片</a>
+			<a target="_self" href="${ctx}/index/index.html" class="btn btn-success" title="DPI帅选"><i class="fa fa-cogs"></i> DPI筛选</a>
 			<button id="add" onclick="save()" type="button" class="btn btn-primary radius button_02"><i class="fa fa-cloud-upload"></i> 开始检索</button>
 		</div>
 	</div>
-	 <form name="AnnexForm" action="${ctx}/index/download_log">
-		<input type="hidden" id="logPath" name="logPath"/>
-	</form>
 </body>
 </html>

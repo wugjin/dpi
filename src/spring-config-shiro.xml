@@ -23,6 +23,7 @@
 			<value>
 				/ = anon
 				/index/** = anon
+				/query/** = anon
 			</value>
 		</property>
 	</bean>
